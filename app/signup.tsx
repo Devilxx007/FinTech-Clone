@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'expo-router'
 const SignUp = () => {
   const [countryCode,setcountryCode] = useState('+91')
+  const [mobile,setMobile] = useState("")
   return (
     <KeyboardAvoidingView style={{flex:1}} behavior='padding' keyboardVerticalOffset={80}>
     <View style={styles.container}>
@@ -30,7 +31,8 @@ const SignUp = () => {
           placeholderTextColor={"gray"}
           keyboardType='numeric'
           style={styles.input_field}
-          />
+          onChangeText={setMobile}
+          value={mobile}/>
         </TouchableOpacity>
         </View>
       </View>

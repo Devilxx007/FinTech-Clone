@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import {Stack, useRouter} from 'expo-router'
+import {Stack, useRouter,Link} from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 
 const RootLayout = () => {
@@ -12,6 +12,19 @@ const RootLayout = () => {
         }}/>
         <Stack.Screen name='login' options={{
            headerTitle:"",
+           headerShadowVisible:false,
+           headerLeft:()=>(
+             <TouchableOpacity onPress={router.back}>
+               <Ionicons name='arrow-back' color={"black"} size={28}/>
+             </TouchableOpacity>
+           ),
+           headerRight:()=>(
+             <Link href={"/help"} asChild>
+               <TouchableOpacity>
+               <Ionicons name="help-circle-outline" size={30} color="black" />
+             </TouchableOpacity>
+             </Link>
+           )
            
         }}/>
         <Stack.Screen name='signup' options={{
@@ -21,7 +34,17 @@ const RootLayout = () => {
               <TouchableOpacity onPress={router.back}>
                 <Ionicons name='arrow-back' color={"black"} size={28}/>
               </TouchableOpacity>
+            ),
+            headerRight:()=>(
+              <Link href={"/help"} asChild>
+                <TouchableOpacity>
+                <Ionicons name="help-circle-outline" size={30} color="black" />
+              </TouchableOpacity>
+              </Link>
             )
+        }}/>
+        <Stack.Screen name='help' options={{
+          presentation:"modal"
         }}/>
     </Stack>
   )
