@@ -1,9 +1,25 @@
 import { View, Text,StyleSheet, TouchableOpacity, TextInput,KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
-import { Link } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
+import { useSignUp } from '@clerk/clerk-expo'
 const SignUp = () => {
   const [countryCode,setcountryCode] = useState('+91')
   const [mobile,setMobile] = useState("")
+  const router = useRouter()
+  const {signUp} = useSignUp();
+
+  const onSignUp = async ()=>{
+    const fullphoneNumber = `${countryCode}${mobile}`;
+    try {
+      await signUp!.create({
+        phoneNumber:fullphoneNumber,
+      })
+      signUp!.preparePhoneNumberVerification();
+      router.push({pathname:'/verify/[phone]',params:{phone:fullphoneNumber}})
+    } catch (error) {
+      console.error("Error signing up",error)
+    }
+  }
   return (
     <KeyboardAvoidingView style={{flex:1}} behavior='padding' keyboardVerticalOffset={80}>
     <View style={styles.container}>
@@ -43,7 +59,7 @@ const SignUp = () => {
       </View>
       <View style={{flex:1}}></View>
       <View style={{padding:10}}>
-        <TouchableOpacity style={{backgroundColor:"black",paddingVertical:10,borderRadius:99999}}>
+        <TouchableOpacity onPress={onSignUp} style={{backgroundColor:"black",paddingVertical:10,borderRadius:99999}}>
           <Text style={{color:"white",textAlign:"center",fontSize:22,fontWeight:"bold"}}>Sign Up</Text>
         </TouchableOpacity>
       </View>
