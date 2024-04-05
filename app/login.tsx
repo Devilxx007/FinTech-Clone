@@ -119,7 +119,7 @@ const Login = () => {
                 fontWeight: 'bold'
               }}
             >
-              Sign Up
+              Log In
             </Text>
           </TouchableOpacity>
         </View>

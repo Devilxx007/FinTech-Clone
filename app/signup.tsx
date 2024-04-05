@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet, TouchableOpacity, TextInput,KeyboardAvoidingView } from 'react-native'
+import { View, Text,StyleSheet, TouchableOpacity, TextInput,KeyboardAvoidingView, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { Link, useRouter } from 'expo-router'
 import { useSignUp } from '@clerk/clerk-expo'
@@ -20,8 +20,10 @@ const SignUp = () => {
       console.error("Error signing up",error)
     }
   }
+
+  
   return (
-    <KeyboardAvoidingView style={{flex:1}} behavior='padding' keyboardVerticalOffset={80}>
+    <KeyboardAvoidingView style={{flex:1}} behavior='padding' keyboardVerticalOffset={Platform.OS==="ios"?90:80}>
     <View style={styles.container}>
       <View style={{padding:5,marginLeft:"3%"}}>
         <Text style={styles.header}>Let's get started!</Text>
@@ -83,11 +85,12 @@ const styles = StyleSheet.create({
   input_field:{
     fontSize:18,
     letterSpacing:1,
-    marginLeft:9
+    marginLeft:9,
   },
   country_field:{
-    fontSize:18,
+    fontSize:15,
     textAlign:"center",
-    fontWeight:"bold"
+    fontWeight:"bold",
+    padding:"5%"
   }
 })
