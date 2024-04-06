@@ -43,7 +43,7 @@ const SignUp = () => {
           />
         </TouchableOpacity>
         <View style={{flex:1}}>
-        <TouchableOpacity style={{backgroundColor:"#E5E4E2",borderRadius:20,paddingVertical:20}}>
+        <TouchableOpacity style={{backgroundColor:"#E5E4E2",borderRadius:20,paddingVertical:20,flex:1}}>
           <TextInput
           placeholder='Mobile Number'
           placeholderTextColor={"gray"}
@@ -88,9 +88,9 @@ const styles = StyleSheet.create({
     marginLeft:9,
   },
   country_field:{
-    fontSize:15,
+    fontSize:20,
     textAlign:"center",
     fontWeight:"bold",
-    padding:"5%"
+    paddingHorizontal:10,
   }
 })
