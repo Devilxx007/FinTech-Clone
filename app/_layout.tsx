@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import {BalanceProvider} from "@/context/balanceContext"
 import * as SecureStore from 'expo-secure-store';
 
 const CLERK_PUBLISHABLE_KEY = 'pk_test_am9pbnQtZG9ua2V5LTM5LmNsZXJrLmFjY291bnRzLmRldiQ';
@@ -26,9 +27,11 @@ const tokenCache = {
 
 const RootLayout = () => {
   return (
-    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+    <BalanceProvider>
+      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
       <RootLayoutNav />
     </ClerkProvider>
+    </BalanceProvider>
   );
 };
 
