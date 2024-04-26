@@ -7,6 +7,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {BlurView} from 'expo-blur'
+import CustomHeader from '@/components/CustomHeader';
 const TabLayout = () => {
   
   return (
@@ -38,10 +39,11 @@ const TabLayout = () => {
     }}>
         <Tabs.Screen name='index' options={{
           title: 'Home',
-          headerShown:false,
           tabBarIcon:()=>(
             <Entypo name="home" size={28} color="black" />
-          )
+          ),
+          header:()=><CustomHeader/>,
+          headerTransparent:true,
         }}/>
         <Tabs.Screen name='invest' options={{
           title:"Invest",

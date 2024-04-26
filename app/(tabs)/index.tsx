@@ -119,7 +119,8 @@ const styles = StyleSheet.create({
     paddingHorizontal:5,
     paddingVertical:10,
     justifyContent:"space-between",
-    gap:8
+    gap:8,
+    marginRight:5
   },
 });
 export default Home
