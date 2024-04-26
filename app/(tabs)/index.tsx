@@ -1,10 +1,20 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView,FlatList,StyleSheet } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Round from '@/components/Round'
 import { useBalance } from '@/context/balanceContext'
 import { Ionicons } from '@expo/vector-icons'
+import Tile from '@/components/SortableList/Tile'
 const Home = () => {
+  const data = [
+    { id: 'recent' },
+    { id: 'cards' },
+    { id: 'cashback' },
+    { id: 'spent' },
+  ];
+  const renderItem = ({ item }:any) => (
+    <Tile onLongPress={() => true} id={item.id} />
+  );
   const { addRandomTransaction, getBalance, clearTransactions, transactions } =
     useBalance()
   const onAddMoney = () => {
@@ -61,7 +71,7 @@ const Home = () => {
               No transactions yet
             </Text>
           )}
-          {transactions.map((item) => (
+          {transactions.map((item : any) => (
             <View key={item.id} style={{flexDirection:"row",padding:5,alignItems:"center",margin:5}}
             >
               <View
@@ -88,9 +98,28 @@ const Home = () => {
             </View>
           ))}
         </View>
-      </ScrollView>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', padding: 5 }}>Widgets</Text>
+        <FlatList
+        numColumns={2}
+        data = {data}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        contentContainerStyle={styles.contentContainer}
+        columnWrapperStyle={styles.columnWrapper}
+        />
+        </ScrollView>
     </SafeAreaView>
   )
 }
-
+const styles = StyleSheet.create({
+  contentContainer: {
+    padding: 10,
+  },
+  columnWrapper: {
+    paddingHorizontal:5,
+    paddingVertical:10,
+    justifyContent:"space-between",
+    gap:8
+  },
+});
 export default Home
